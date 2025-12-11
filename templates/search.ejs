@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Recipe Finder - Search</title>
+    <link rel="stylesheet" href="/styles.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <h1>Search Recipes</h1>
+    <form action="/recipes/search" method="post">
+      <fieldset>
+        <strong>Search term: </strong>
+        <input type="text" name="query" value="<%= query %>" required/>
+        <input type="submit" value="Search"/>
+      </fieldset>
+    </form>
+    <% if (error) { %>
+      <p class="error"><%= error %></p>
+    <% } %>
+    <% if (recipes && recipes.length > 0) { %>
+      <h2>Results for "<%= query %>"</h2>
+      <% recipes.forEach(function(meal){ %>
+        <hr/>
+        <h3><%= meal.strMeal %></h3>
+        <img src="<%= meal.strMealThumb %>" alt="<%= meal.strMeal %>" width="200"/>
+        <br/><br/>
+        <form action="/recipes/save" method="post">
+          <input type="hidden" name="apiId" value="<%= meal.idMeal %>"/>
+          <input type="hidden" name="name" value="<%= meal.strMeal %>"/>
+          <input type="hidden" name="thumbnail" value="<%= meal.strMealThumb %>"/>
+          <strong>Optional note: </strong>
+          <input type="text" name="note" placeholder="Add a short note"/>
+          <br/><br/>
+          <input type="submit" value="Save to Favorites"/>
+        </form>
+      <% }); %>
+    <% } else { %>
+      <p class="info">Enter a search term above to find recipes.</p>
+    <% } %>
+    <hr/>
+    <a href="/">HOME</a> |
+    <a href="/recipes/favorites">View Favorite Recipes</a>
+  </body>
+</html>

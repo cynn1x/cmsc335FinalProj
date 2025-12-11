@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Recipe Saved</title>
+    <link rel="stylesheet" href="/styles.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <h1>Recipe Saved</h1>
+    <p><strong>Name:</strong> <%= recipe.name %></p>
+    <% if (recipe.thumbnail) { %>
+      <img src="<%= recipe.thumbnail %>" alt="<%= recipe.name %>" width="250"/>
+      <br/><br/>
+    <% } %>
+    <% if (recipe.note) { %>
+      <p><strong>Note:</strong> <%= recipe.note %></p>
+    <% } %>
+    <hr/>
+    <p>Task completed at <%= recipe.createdAt.toLocaleString() %></p>
+    <hr/>
+    <a href="/">HOME</a> |
+    <a href="/recipes/favorites">View Favorites</a>
+  </body>
+</html>

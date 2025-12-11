@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Recipe Finder - Favorites</title>
+    <link rel="stylesheet" href="/styles.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <h1>My Favorite Recipes</h1>
+    <% if (recipes && recipes.length > 0) { %>
+      <% recipes.forEach(function(r){ %>
+        <hr/>
+        <h3><%= r.name %></h3>
+        <% if (r.thumbnail) { %>
+          <img src="<%= r.thumbnail %>" alt="<%= r.name %>" width="200"/>
+          <br/>
+        <% } %>
+        <% if (r.note) { %>
+          <p><strong>Note:</strong> <%= r.note %></p>
+        <% } %>
+        <p>Saved on: <%= r.createdAt.toLocaleString() %></p>
+        <form action="/recipes/delete/<%= r._id %>" method="post">
+          <input type="submit" value="Remove from Favorites"/>
+        </form>
+      <% }); %>
+      <hr/>
+      <form action="/recipes/removeAll" method="post">
+        <input type="submit" value="Remove All Favorites"/>
+      </form>
+    <% } else { %>
+      <p class="info">You do not have any favorite recipes yet.</p>
+    <% } %>
+    <hr/>
+    <a href="/">HOME</a> |
+    <a href="/recipes/search">Search Recipes</a>
+  </body>
+</html>
