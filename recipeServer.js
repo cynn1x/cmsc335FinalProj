@@ -43,7 +43,7 @@ if (process.env.PORT) {
 const PORT = process.env.PORT || 3000;
 const uri = process.env.MONGO_CONNECTION_STRING;
 if (!uri) {
-  console.log("MONGO_CONNECTION_STRING is not defined");
+  console.log("Connection String not defined");
   process.exit(1);
 }
 
